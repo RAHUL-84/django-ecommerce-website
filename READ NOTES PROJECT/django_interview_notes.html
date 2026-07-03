@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>Django Project — Interview Notes</title>
+<style>
+  :root{
+    --bg: #0f1420;
+    --panel: #161d2e;
+    --panel2: #1c2540;
+    --border: #2a3454;
+    --text: #e8ecf7;
+    --muted: #93a0c4;
+    --blue: #5aa8ff;
+    --green: #4fd6a8;
+    --orange: #ff9d5c;
+    --pink: #ff7fb0;
+    --yellow: #ffd166;
+    --purple: #b28dff;
+    --red: #ff6b6b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(circle at 10% 0%, #1a2340 0%, #0f1420 55%);
+    color:var(--text);
+    font-family: "Noto Sans Devanagari", "Segoe UI", Roboto, sans-serif;
+    line-height:1.7;
+    padding: 40px 16px 80px;
+  }
+  .wrap{max-width: 880px; margin:0 auto;}
+  h1.title{
+    font-size: 30px;
+    text-align:center;
+    background: linear-gradient(90deg, var(--blue), var(--pink), var(--yellow));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom: 6px;
+  }
+  .subtitle{
+    text-align:center; color:var(--muted); margin-bottom:40px; font-size:14px;
+    letter-spacing:.5px;
+  }
+  .part{
+    background: var(--panel);
+    border:1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  }
+  .part-label{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#0f1420;
+    padding:4px 12px;
+    border-radius:20px;
+    margin-bottom:14px;
+  }
+  .p1 .part-label{background:var(--blue);}
+  .p2 .part-label{background:var(--orange);}
+  .p3 .part-label{background:var(--pink);}
+  .p4 .part-label{background:var(--purple);}
+
+  h2.q{
+    font-size:19px;
+    margin: 22px 0 8px;
+    color:var(--yellow);
+    border-left:4px solid var(--yellow);
+    padding-left:10px;
+  }
+  h2.q:first-of-type{margin-top:6px;}
+
+  h3.sub{
+    color:var(--green);
+    font-size:16px;
+    margin:18px 0 6px;
+  }
+
+  p{color:var(--text); margin:8px 0;}
+  .muted{color:var(--muted);}
+
+  .callout{
+    background: var(--panel2);
+    border-left: 4px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    color:var(--text);
+  }
+  .callout.green{border-color:var(--green);}
+  .callout.orange{border-color:var(--orange);}
+  .callout.pink{border-color:var(--pink);}
+  .callout.red{border-color:var(--red);}
+  .callout b{color:var(--yellow);}
+
+  code.inline{
+    background:#0b1120;
+    color:var(--green);
+    padding:2px 7px;
+    border-radius:5px;
+    font-size:14px;
+    border:1px solid var(--border);
+  }
+
+  pre{
+    background:#0a0e18;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+    overflow-x:auto;
+    margin:12px 0;
+    font-size:13.5px;
+  }
+  pre code{font-family: "Fira Code", Consolas, monospace; color:var(--text);}
+  .kw{color:var(--purple);}
+  .str{color:var(--yellow);}
+  .fn{color:var(--blue);}
+  .cmt{color:var(--muted); font-style:italic;}
+  .tag{color:var(--pink);}
+  .attr{color:var(--orange);}
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin:14px 0;
+    font-size:14px;
+  }
+  .flow span.box{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    padding:6px 12px;
+    border-radius:8px;
+    color:var(--blue);
+    font-weight:600;
+  }
+  .flow span.arrow{color:var(--muted);}
+
+  ol, ul{padding-left:22px;}
+  li{margin:6px 0;}
+  strong{color:var(--orange);}
+
+  .badge-fix{
+    display:inline-block;
+    background:var(--green);
+    color:#052e22;
+    font-weight:700;
+    font-size:12px;
+    padding:3px 10px;
+    border-radius:14px;
+    margin-bottom:8px;
+  }
+  .badge-bug{
+    display:inline-block;
+    background:var(--red);
+    color:#3a0a0a;
+    font-weight:700;
+    font-size:12px;
+    padding:3px 10px;
+    border-radius:14px;
+    margin-bottom:8px;
+  }
+
+  .divider{
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--border), transparent);
+    margin:22px 0;
+  }
+
+  hr.sep{border:none; border-top:1px dashed var(--border); margin:20px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="title">Django Shopping Project</h1>
+  <p class="subtitle">Interview Notes — Concepts + Project Problems (Hindi)</p>
+
+  <!-- PART 1 -->
+  <div class="part p1">
+    <span class="part-label">भाग 1</span>
+    <h2 style="margin-top:0; color:var(--blue);">Conceptual सवालों के जवाब</h2>
+
+    <h2 class="q">Q1. "Relation" कौन सा लगा है?</h2>
+    <p>आपके models में मुख्यतः दो तरह के relations हो सकते हैं:</p>
+
+    <h3 class="sub">ForeignKey (One-to-Many)</h3>
+    <p>जैसे <code class="inline">Product</code> का <code class="inline">Category</code> से रिश्ता:</p>
+    <pre><code><span class="kw">class</span> <span class="fn">Product</span>(models.Model):
+    category = models.<span class="fn">ForeignKey</span>(Category, on_delete=models.CASCADE)</code></pre>
+    <p class="muted">मतलब — एक Category में कई Products हो सकते हैं, पर एक Product सिर्फ एक Category का होगा।</p>
+
+    <div class="callout orange">
+      लेकिन आपके <b>Cart</b> और <b>OrderDetail</b> model में <code class="inline">phone</code>/<code class="inline">user</code> को CharField जैसा इस्तेमाल किया गया है (ForeignKey नहीं), क्योंकि session में सिर्फ <code class="inline">phone</code> (text) स्टोर हो रहा है, Customer object नहीं। यहाँ कोई proper Django relation नहीं है — सिर्फ manual filtering हो रही है।
+    </div>
+
+    <div class="callout green">
+      <b>Interview में बोलना है:</b> "मैंने Product-Category में ForeignKey relation इस्तेमाल किया, लेकिन Customer-Cart-Order को मैंने session-based phone number से manually link किया, प्रॉपर ForeignKey इस्तेमाल नहीं किया।"
+    </div>
+
+    <h2 class="q">Q2. URL कैसे बनता है (view → url → admin flow)</h2>
+    <div class="flow">
+      <span class="box">Browser Request</span><span class="arrow">→</span>
+      <span class="box">urls.py</span><span class="arrow">→</span>
+      <span class="box">views.py</span><span class="arrow">→</span>
+      <span class="box">models.py</span><span class="arrow">→</span>
+      <span class="box">template (HTML)</span><span class="arrow">→</span>
+      <span class="box">Response</span>
+    </div>
+    <pre><code><span class="cmt"># urls.py</span>
+urlpatterns = [
+    path(<span class="str">'search/'</span>, views.search, name=<span class="str">'search'</span>),
+]</code></pre>
+    <p>जब browser में <code class="inline">http://127.0.0.1:8000/search/?query=EAR</code> जाता है — Django <code class="inline">urls.py</code> में देखता है कि <code class="inline">search/</code> किस function से जुड़ा है, फिर उस function को call करता है।</p>
+
+    <div class="callout pink">
+      <b>Django Admin</b> अलग से auto-generate होता है — यह built-in feature है। बस <code class="inline">admin.py</code> में model <b>register</b> करना होता है:
+      <pre style="margin-top:8px;"><code>admin.site.register(Product, AdminProduct)</code></pre>
+      इसके बाद Django खुद-ब-खुद Add/Change/Delete UI बना देता है <code class="inline">/admin/</code> पर।
+    </div>
+
+    <h2 class="q">Q3. makemigrations / migrate क्यों किया?</h2>
+    <ul>
+      <li><strong>makemigrations</strong> — models.py में बदलाव चेक करके एक "blueprint" (migration file) बनाता है।</li>
+      <li><strong>migrate</strong> — उस blueprint को असली Database में apply करता है, यानी table बनाता/बदलता है।</li>
+    </ul>
+    <div class="callout red">बिना migrate किए, database में table ही नहीं बनेगी, और Admin में उस model को register करने पर crash होगा (table not found)।</div>
+    <div class="flow">
+      <span class="box">models.py</span><span class="arrow">→</span>
+      <span class="box">makemigrations</span><span class="arrow">→</span>
+      <span class="box">migrate</span><span class="arrow">→</span>
+      <span class="box">admin.py register</span><span class="arrow">→</span>
+      <span class="box">Admin Panel</span>
+    </div>
+
+    <h2 class="q">Q4. base.html क्यों बनाई?</h2>
+    <p>हर page में Navbar, Footer, CSS/JS, Bootstrap जैसी चीज़ें repeat होती हैं — बार-बार लिखना गलत practice है (<strong>DRY Principle</strong>)।</p>
+    <pre><code><span class="tag">{% extends</span> <span class="str">'base.html'</span> <span class="tag">%}</span>
+<span class="tag">{% block</span> content <span class="tag">%}</span>
+  <span class="cmt">&lt;!-- सिर्फ उस page का unique content --&gt;</span>
+<span class="tag">{% endblock %}</span></code></pre>
+
+    <p><strong>href change क्यों होता है:</strong> navbar में hardcoded URL की जगह Django का <code class="inline">{% url %}</code> tag इस्तेमाल होता है:</p>
+    <pre><code>&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="str">"{% url 'cart' %}"</span>&gt;Cart&lt;/<span class="tag">a</span>&gt;</code></pre>
+    <p class="muted">फ़ायदा: urls.py में path बदलने पर भी <code class="inline">{% url %}</code> अपने-आप सही URL निकाल लेगा — manually हर file में href बदलना नहीं पड़ेगा। इसीलिए नया view/url बनाने के बाद base.html में href अपडेट करना पड़ता है।</p>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part p2">
+    <span class="part-label">भाग 2 — Project Problem 1</span>
+    <h2 style="margin-top:0; color:var(--orange);">Add to Cart में सारे items एक साथ checkout हो रहे हैं</h2>
+    <span class="badge-bug">BUG</span>
+    <p>Flipkart जैसा behavior चाहिए — हर cart item का <strong>अपना अलग checkout/order</strong> हो, सबका मिलाकर एक साथ नहीं।</p>
+    <div class="callout orange">
+      कारण: checkout view पूरे phone/session के सारे Cart items को एक साथ loop करके एक ही जगह से Order बना रहा है, individual item handle नहीं हो रहा।
+    </div>
+    <h3 class="sub">Option A</h3>
+    <p>हर Cart item का अलग <strong>"Buy Now"</strong> बटन हो, जो सिर्फ उस एक item का checkout खोले (<code class="inline">cart_id</code> पास करके)।</p>
+    <h3 class="sub">Option B</h3>
+    <p>Checkout में सिर्फ उन items का Order बने जिन्हें ✅ checkbox से select किया गया हो (Flipkart जैसा)।</p>
+    <div class="callout green">Exact fix के लिए checkout/order बनाने वाला view function चाहिए — भेजने पर exact लाइन बताई जाएगी।</div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part p3">
+    <span class="part-label">भाग 3 — Project Problem 2</span>
+    <h2 style="margin-top:0; color:var(--pink);">Search सिर्फ Home Page वाले Products दिखा रहा है</h2>
+    <span class="badge-bug">BUG</span>
+    <p>असली search function में <code class="inline">query</code> लिया तो गया, पर <strong>Product model को कभी query ही नहीं किया गया:</strong></p>
+    <pre><code><span class="kw">def</span> <span class="fn">search</span>(request):
+    totalitem = 0
+    <span class="kw">if</span> request.session.has_key(<span class="str">'phone'</span>):
+        phone = request.session[<span class="str">"phone"</span>]
+        query = request.GET.get(<span class="str">'query'</span>)
+        totalitem = len(OrderDetail.objects.filter(user=phone))
+        customer = Customer.objects.filter(phone=phone)
+        <span class="kw">for</span> c <span class="kw">in</span> customer:
+            name = c.name
+
+        <span class="kw">return</span> render(request, <span class="str">'search.html'</span>)  <span class="cmt"># koi product data pass hi nahi ho raha!</span></code></pre>
+
+    <span class="badge-fix">FIX</span>
+    <pre><code><span class="kw">from</span> .models.product <span class="kw">import</span> Product
+
+<span class="kw">def</span> <span class="fn">search</span>(request):
+    query = request.GET.get(<span class="str">'query'</span>)
+    products = Product.objects.filter(name__icontains=query) <span class="kw">if</span> query <span class="kw">else</span> []
+
+    context = {
+        <span class="str">'products'</span>: products,
+        <span class="str">'query'</span>: query,
+    }
+    <span class="kw">return</span> render(request, <span class="str">'search.html'</span>, context)</code></pre>
+
+    <p>और <code class="inline">search.html</code> में:</p>
+    <pre><code><span class="tag">{% for</span> product <span class="tag">in</span> products <span class="tag">%}</span>
+    {{ product.name }}
+<span class="tag">{% endfor %}</span></code></pre>
+    <p class="muted">यह Product table के <code class="inline">name</code> field में query text ढूंढेगा (<code class="inline">icontains</code> = case-insensitive partial match)।</p>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part p4">
+    <span class="part-label">भाग 4</span>
+    <h2 style="margin-top:0; color:var(--purple);">पूरा Project — Interview के लिए Feature-wise Breakdown</h2>
+    <p class="muted">यह हिस्सा अलग document में feature-by-feature (models, urls, views, session, login, cart, search, admin registration) कवर करेगा।</p>
+  </div>
+
+</div>
+</body>
+</html>

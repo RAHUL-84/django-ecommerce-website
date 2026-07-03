@@ -1,0 +1,208 @@
+🟢 1. Category Model Kaise Banayi?
+🔹 Step 1
+
+📁 File Banayi
+
+store/models/category.py
+from django.db import models
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+⬇
+
+🔹 Step 2
+
+📁 models/init.py
+
+from .category import Category
+
+⬇
+
+🔹 Step 3
+
+📁 admin.py
+
+admin.site.register(Category)
+
+⬇
+
+🔹 Step 4
+
+🖥 Migration Banayi
+
+python manage.py makemigrations
+
+⬇
+
+🔹 Step 5
+
+🖥 Database Me Table Banayi
+
+python manage.py migrate
+
+⬇
+
+✅ Result
+
+✔ Category Table Database me ban gayi.
+
+✔ Django Admin me Add aur Change option aa gaya.
+
+🔵 2. Product Model Kaise Banaya?
+🔹 Step 1
+
+📁 File Banayi
+
+store/models/product.py
+class Product(models.Model):
+    name = models.CharField(...)
+    price = models.IntegerField(...)
+    image = models.ImageField(...)
+    category = models.ForeignKey(Category,...)
+
+⬇
+
+🔹 Step 2
+from .product import Product
+
+⬇
+
+🔹 Step 3
+admin.site.register(Product)
+
+⬇
+
+🔹 Step 4
+python manage.py makemigrations
+
+⬇
+
+🔹 Step 5
+python manage.py migrate
+
+⬇
+
+✅ Result
+
+✔ Product Table Database me ban gayi.
+
+✔ Django Admin me Product Add aur Change aa gaya.
+
+🟡 3. Customer Model Kaise Banaya?
+🔹 Step 1
+
+📁 customer.py
+
+class Customer(models.Model):
+    name = models.CharField(...)
+    phone = models.CharField(...)
+
+⬇
+
+🔹 Step 2
+from .customer import Customer
+
+⬇
+
+🔹 Step 3
+admin.site.register(Customer)
+
+⬇
+
+🔹 Step 4
+python manage.py makemigrations
+
+⬇
+
+🔹 Step 5
+python manage.py migrate
+
+⬇
+
+✅ Result
+
+✔ Customer Table Database me ban gayi.
+
+✔ Django Admin me Customer Add aur Change aa gaya.
+
+🟣 4. Cart Model Kaise Banaya?
+🔹 Step 1
+
+📁 cart.py
+
+class Cart(models.Model):
+    phone=models.CharField(...)
+    product=models.ForeignKey(Product,...)
+    quantity=models.PositiveIntegerField(...)
+
+⬇
+
+🔹 Step 2
+from .cart import Cart
+
+⬇
+
+🔹 Step 3
+admin.site.register(Cart)
+
+⬇
+
+🔹 Step 4
+python manage.py makemigrations
+
+⬇
+
+🔹 Step 5
+python manage.py migrate
+
+⬇
+
+✅ Result
+
+✔ Cart Table Database me ban gayi.
+
+✔ Django Admin me Cart Add aur Change aa gaya.
+
+🔴 5. OrderDetail Model Kaise Banaya?
+🔹 Step 1
+
+📁 order.py
+
+class OrderDetail(models.Model):
+    customer=models.ForeignKey(Customer,...)
+    product=models.ForeignKey(Product,...)
+
+⬇
+
+🔹 Step 2
+from .order import OrderDetail
+
+⬇
+
+🔹 Step 3
+admin.site.register(OrderDetail)
+
+⬇
+
+🔹 Step 4
+python manage.py makemigrations
+
+⬇
+
+🔹 Step 5
+python manage.py migrate
+
+⬇
+
+✅ Result
+
+✔ OrderDetail Table Database me ban gayi.
+
+✔ Django Admin me OrderDetail Add aur Change aa gaya.
+
+⭐ Interview Me Ek Line Me
+
+🟢 Answer:
+
+Sabse pehle maine Model Class banayi. Uske baad models/__init__.py me import kiya. Fir admin.py me admin.site.register() se register kiya. Uske baad python manage.py makemigrations chalaya jisse migration file bani. Fir python manage.py migrate chalaya jisse database me table create ho gayi. Iske baad Django Admin me us model ka Add aur Change option automatically dikhne laga.

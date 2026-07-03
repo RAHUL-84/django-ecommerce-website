@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title  %}Cart{% endblock title %}
+{% block content %}
+
+<div class="container">
+    <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4">My Cart</p>
+        <hr>
+
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th>Sr no.</th>
+                <th>Image</th>
+                <th>Product name</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th></th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for cart in cart %}
+
+            <tr>
+
+                <td>{{forloop.counter}}</td>
+                <td><img style="height:80px" class="rounded-circle" src="{{ cart.product.image.url }}" alt=""></td>
+                <td>{{cart.product.name}}</td>
+                <td>{{cart.quantity}}</td>
+                <!--<td><span id="quantity{{cart.product.id}}">{{cart.quantity}}</span></td>-->
+                <td>Rs.{{cart.product.price}}</td>
+
+                <td><input type="button" pid="{{cart.product.id}}" class="minus-cart btn btn btn-primary" value="-"></td>
+                <td><span id="quantity{{cart.product.id}}">{{cart.quantity}}</span></td>
+                <td><input type="button" pid="{{cart.product.id}}" class="plus-cart btn btn btn-primary" value="+"></td>
+                <td><input type="button" pid="{{cart.product.id}}" class="btn btn-danger btn-sm remove-cart" value="Delete"></td>
+
+            </tr>
+
+
+            </tbody>
+            {% endfor %}
+        </table>
+
+        <hr>
+        <div class="m-3 p-3">
+
+            <a href="#" data-bs-toggle="modal"  data-bs-target="#exampleModal" class="btn btn-outline-info border rounded col-log-3 float-right">Check Out</a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<!--CHECKOUT-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          <form action="/checkout" method="POST">
+              {% csrf_token %}
+
+              <div class="form-group mt-3">
+                  <label>Name</label>
+                  <input requird type="text" name="name" id="name" class="form-control" placeholder="Enter Your Name">
+              </div>
+
+               <div class="form-group mt-3">
+                  <label>Shipping Address</label>
+                  <input requird type="text" name="address" id="address" class="form-control" placeholder="Enter Shipping Address">
+              </div>
+
+               <div class="form-group mt-3">
+                  <label>Mobile No</label>
+                  <input requird type="text" name="mobile" id="mobie" class="form-control" placeholder="Enter Mobile No">
+              </div>
+
+              <input type="submit" class="btn btn-outline-info border rounded col-lg-3 float-right mt-3" value="Make Payment">
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$('.plus-cart').click(function () {
+
+    var id = $(this).attr("pid").toString();
+    console.log(id);
+
+    $.ajax({
+        type: "GET",
+        url: "/plus_cart",
+        data: {
+            prod_id: id
+        },
+        success: function (data) {
+            console.log(data);
+
+        }
+    });
+
+});
+
+
+
+    $('.minus-cart').click(function () {
+
+    var id = $(this).attr("pid").toString();
+    console.log(id);
+
+    $.ajax({
+        type: "GET",
+        url: "/minus_cart",
+        data: {
+            prod_id: id
+        },
+        success: function (data) {
+            console.log(data);
+
+        }
+    });
+
+});
+
+
+
+ $('.remove-cart').click(function () {
+
+    var id = $(this).attr("pid").toString();
+    console.log(id);
+    var eml=this
+
+    $.ajax({
+        type: "GET",
+        url: "/remove_cart",
+        data: {
+            prod_id: id
+        },
+        success: function (data) {
+            console.log(data);
+            $(mythis).closest("tr").fadeout()
+
+        }
+    });
+
+});
+</script>
+{% endblock %}
